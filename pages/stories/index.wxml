@@ -1,0 +1,32 @@
+<!-- <image mode='aspectFill' src="https://resources.ninghao.net/landrover/discover-1.jpg"></image>
+<image mode='aspectFill' src="https://resources.ninghao.net/landrover/velar-1.jpg"></image>
+
+<view>
+  车身下部特征造型的三条经典线条、飘逸的车顶线和延续的腰线赋予揽胜极高的辨识度。独具特色的侧影略呈锥形，线条更为利落，亮光黑色支柱让车顶格外引人注目。
+</view> -->
+<!-- <block wx:for="{{stories}}">
+  <video src="{{item.video}}"></video>
+  <image src="{{item.image}}"></image>
+</block> -->
+
+
+<view class="cards">
+  <view class="card" hover-class='hover' wx:for="{{stories}}" wx:key="id">
+    <image hidden='{{currentVid === item.id}}' data-vid="{{item.id}}" bindtap='play' mode='aspectFill' src="{{item.image}}">
+    <view class="label">{{item.duration}}</view>
+    </image>
+    <video hidden='{{currentVid !== item.id}}' id="{{item.id}}" src="{{item.video}}" poster='{{item.image}}' objectFit='cover' duration='{{item.duration_raw}}'></video>
+    <navigator url="/pages/stories/show?id={{item.id}}" hover-class='none'>
+    <view class="content">
+       <view class="header">
+        {{item.header}}
+        <view class="sub-header">
+          {{item.sub_header}}
+        </view>
+      </view>
+      <view class="description">{{item.description}}</view>
+      <view class="meta">{{item.meta.price}}</view>
+    </view>
+    </navigator>
+  </view>
+</view>

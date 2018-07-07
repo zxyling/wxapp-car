@@ -1,13 +1,34 @@
-<!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+ <swiper class="section hero white" indicator-dots='{{true}}'>
+  <block wx:for="{{slides}}" wx:key="id">
+    <swiper-item>
+      <image mode='aspectFill' src="{{item.image}}"></image>
+      <view class="content centered">
+        <view class="sub-header">{{item.sub_header}}</view>
+        <view class="header">{{item.header}}</view>
+        <view class="description">{{item.description}}</view>
+        <view class="action">
+          <button class="button" bindtap='testDrive'>预约试驾</button>
+          <button class="button primary" bindtap="readMore"  data-id="{{item.id}}">了解更多</button>
+        </view>
+      </view>
+    </swiper-item>
+  </block>
+</swiper> 
+
+<view class="cards">
+  <view class="card" hover-class='hover' wx:for="{{entities}}" wx:key="id">
+    <navigator url="/pages/vehicles/index?id={{item.id}}" hover-class='none'>
+    <image mode='aspectFill' src="{{item.image}}"></image>
+    <view class="content">
+       <view class="header">
+        {{item.header}}
+        <view class="sub-header">
+          {{item.sub_header}}
+        </view>
+      </view>
+      <view class="description">{{item.description}}</view>
+      <view class="meta">{{item.meta.price}}</view>
+    </view>
+    </navigator>
   </view>
 </view>

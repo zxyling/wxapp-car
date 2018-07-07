@@ -1,30 +1,35 @@
-import testDrive from '../../modules/testDrive.js';
-
 const app = getApp();
-
 Page({
-  testDrive,
+
   /**
    * 页面的初始数据
    */
   data: {
-    slides: null,
-    entities: null
+    stories:null,
+    currentVid: null,
+    currentVideo: null
   },
-  readMore(ev) {
-    let id = ev.target.dataset.id;
-    wx.navigateTo({
-      url: `/pages/vehicles/index?id=${id}`
+  play(ev) {
+    if (this.data.currentVid !== null) {
+      this.data.currentVideo.pause();
+    }
+    
+    const currentVideo = wx.createVideoContext(`${ev.target.dataset.vid}`);
+
+    currentVideo.play();
+
+    this.setData({
+      currentVideo,
+      currentVid: ev.target.dataset.vid
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      slides: app.globaData.slides,
-      entities: app.globaData.vehicles  
-    })
+      this.setData({
+        stories: app.globaData.stories
+      })
   },
 
   /**
